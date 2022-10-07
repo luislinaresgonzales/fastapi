@@ -2,7 +2,7 @@
 from typing import Optional
 from enum import Enum
 
-#Pydantic ❯ uvicorn main:app --reload
+#Pydantic ❯ uvicorn main:app --reload 
 from pydantic import BaseModel
 from pydantic import Field
 
