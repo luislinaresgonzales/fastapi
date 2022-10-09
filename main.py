@@ -8,6 +8,7 @@ from pydantic import Field
 
 #fastapi
 from fastapi import FastAPI, Path, Query
+from fastapi import status
 from fastapi import Body, Query, Path
 
 app = FastAPI()
@@ -65,20 +66,30 @@ class PersonOut(PersonBase):
     pass
 
 
-@app.get("/")
+@app.get(
+    path="/", 
+    status_code=status.HTTP_200_OK
+    )
 def home():
     return {"hello" : "work"}
 
 #request and response body
 
-@app.post("/person/new", response_model=PersonOut)
+@app.post(
+    path="/person/new", 
+    response_model=PersonOut,
+    status_code=status.HTTP_201_CREATED
+    )
 def create_person(person: Person = Body(...)):
     return person    
 
 
 # validaciones query param
 
-@app.get("/person/detail")
+@app.get(
+    path="/person/detail",
+    status_code=status.HTTP_200_OK
+    )
 def show_person(
     name: Optional[str] = Query(
         None, 
